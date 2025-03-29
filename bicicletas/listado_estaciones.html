@@ -2,11 +2,25 @@
 <html>
     <head>
         <title>Estaciones Bicicleta</title>
+        <link href="styles/styles.css" rel="stylesheet">
     </head>
     <body>
         <h3 style="font-family: fantasy;">Listado Estaciones</h3>
         <hr>
-        <table border="1px" width="70%" align="left">
+        <label for="input-nombre-dir">Nombre o dirección:</label>
+        <input type="text" id="input-nombre-dir">
+        <label for="select-barrio">Barrio:</label>
+        <select id="select-barrio">
+            <option value="1">Ciudad Universitaria</option>
+            <option value="2">Nueva Córdoba</option>
+            <option value="3">Centro</option>
+            <option value="4">Alberdi</option>
+        </select>
+        <label for="checkbox-inactivas">Incluir estaciones inactivas:</label>
+        <input type="checkbox">
+        <button type="submit">Buscar</button>
+        <hr>
+        <table width="70%">
             <thead>
                 <tr>
                     <th>Nro</th>
