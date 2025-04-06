@@ -3,12 +3,14 @@ Etiquietas:
 <head></head> : todo lo que es informacion de la pagina
 <body></body> : todo lo que es contenido de la pagina
 Dentro de <head>:
+<div></div> : una subparte de la pagina
 <title>[titulo]</title> : nombre de la pagina, aparece en la pestaña
 <style>[css]</style> : aplica el codigo css a todo el html
 <link href="[URL]"> : carga un recurso al html? puede ser local o remoto?
 Dentro de <body>
 <h1>[contenido]</h1> : hace un titulo con [contenido] en negrita. Va de h1 a h6, donde h1 es el mas grande
 <p></p> : parrafo
+<a href="url">[texto]</a> : crea un link en texto a la url
 <hr> : linea horizontal
 <br> : salto de linea
 <table></table> : crea una tabla
@@ -17,12 +19,22 @@ Dentro de <body>
             <td>[contenido]</td> : celda con el contenido
             <th>[contenido]</th> : celda con el contenido en negrita
     <tbody></tbody> : todo lo que se considera cuerpo de la tabla, opcional. Puede llevar las mismas etiquetas que thead adentro
+<ul></ul> : crea una lista desordenada
+    <li>[Elemento]</li> : crea un elemento en la lista
 <form></form> : crea un formulario que cuando se envia ejecuta cosas
 <label>[etiqueta]</label> : pone un texto como etiqueta al lado de otro objeto
 <input> : crea un input. El tipo se establece con el atributo type
 <select></select> : crea un selector de opciones desplegables
     <option>[opcion]</option> : crea una opcion con el texto [opcion] en el desplegable
 <button>[texto]</button> : crea un boton con el texto. El tipo se establece con type
+<img> : pone una imagen, la imagen se especifica con el atributo src
+
+HTML5:
+<header></header> : cabecera
+<main></main> : contenido principal
+<nav></nav> : barra de navegacion
+<aside></aside> : menu secundario
+<footer></footer> : pie de pagina
 
 Atributos:
 name="[name]" : le pone nombre al objeto
@@ -31,9 +43,12 @@ style="[css]" : aplica el estilo escrito en css al objeto
 class="[clase]" : hace que el objeto sea de esa clase
 width="[porcentaje]%" : establece el ancho del objeto respecto al ancho de la pagina
 align="[lado]" : alinea el objeto a la izquierda (left), derecha (right) o al medio (center)
+border="[pixeles]px" : le pone un borde de grosor pixeles al objeto
+padding="[valor]" : distancia entre el contenido dentro del objeto y el borde
+margin="[margen]" : distancia entre el borde y otros objetos
 for="[id]" (label) : al hacer click en la label te lleva al objeto con ese id
 type="[tipo]" : (input): establece el tipo de input, como texto, checkbox, etc. (button): button, menu, submit, reset
-border="[pixeles]px" : le pone un borde de grosor pixeles al objeto
 value="[val]" (option) : le da valor a la opcion? (numerico en selectt?)
 method="[metodo]" : (form) establece que tipo de llamada va a hacer un formulario al enviarse?
 action="[HTML?]" : te lleva al html al enviarse
+src="[ruta]" (img) : especifica la ruta donde esta la imagen
