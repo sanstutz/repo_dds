@@ -52,3 +52,4 @@ value="[val]" (option) : le da valor a la opcion? (numerico en selectt?)
 method="[metodo]" : (form) establece que tipo de llamada va a hacer un formulario al enviarse?
 action="[HTML?]" : te lleva al html al enviarse
 src="[ruta]" (img) : especifica la ruta donde esta la imagen
+placeholder="[texto]" : (input text) el texto que se muestra antes de ingresar datos

@@ -86,17 +86,24 @@
     </header>
 
     <main class="container my-4">
-        <div class="row">
+        <form class="d-flex flex-row-reverse">
+        </form>
+        <div class="row mb-3">
             <img src="images/user-placeholder.png" class="col-4">
-            <form class="col-8 d-flex align-items-center">
-                <div class="flex-fill">
-                    <label class="form-label" for="nombre">Nombre:</label>
-                    <input type="text" class="form-control" id="nombre">
-                    <label class="form-label" for="apellido">Apellido</label>
-                    <input type="text" class="form-control" id="apellido">
-                </div>
-            </form>
+            <div class="col-8 d-flex flex-column justify-content-center">
+                <button class="btn btn-primary mb-auto align-self-end" type="button">Editar perfil</button>
+                <label class="form-label" for="nombre">Nombre:</label>
+                <input type="text" placeholder="Juan" class="form-control mb-3" id="nombre" disabled>
+                <label class="form-label" for="apellido">Apellido</label>
+                <input type="text" placeholder="Pérez" class="form-control mb-auto" id="apellido" disabled>
+            </div>
         </div>
+        <label class="form-label" for="email">Correo electrónico:</label>
+        <input type="text" placeholder="juan@gmail.com" class="form-control mb-3" id="email" disabled>
+        <label class="form-label" for="nacimiento">Fecha de nacimiento:</label>
+        <input type="text" placeholder="01/01/2000" class="form-control mb-3" id="nacimiento" disabled>
+        <label class="form-label" for="telefono">Número de teléfono:</label>
+        <input type="text" placeholder="+54 351 666-4444" class="form-control mb-3" id="telefono" disabled>
     </main>
 
     <footer class="bg-info text-white text-center py-2">
