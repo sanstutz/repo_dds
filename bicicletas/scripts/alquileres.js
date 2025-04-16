@@ -1,19 +1,34 @@
 (function (){
-    document.addEventListener("DOMContentLoaded", cargarHistorial);
+    document.addEventListener("DOMContentLoaded", buscarAlquileres);
+
 })();
 
-function cargarHistorial(){
-    let historial = [
-        // {fh_retiro: "2024-4-14 12:00", estacion_retiro: "Salida", estacion_devolucion: "Descanso 2", fh_devolucion: "2024-4-14 18:00", monto: 15000}
-        ["2024-4-14 12:00", "Salida", "Descanso 2", "2024-4-14 18:00", 15000]
-    ];
-    let tabla = document.getElementById("cuerpo-historial");
+async function buscarAlquileres(){
+    // method: "GET", headers: {"Content-Type": "application/json"}
+    // await == espera a que resuelva la promesa y asigna el valor devuelto
+
+    // const data = fetch("https://api-bici-alquileres.vercel.app/api/alquileres").then(res => res.json()).then(d => {cargarHistorial(d)})
+
+    /*const res = await fetch("https://api-bici-alquileres.vercel.app/api/alquileres");
+    const data = await res.json();*/
+
+    const data = await fetch("https://api-bici-alquileres.vercel.app/api/alquileres").then(res => res.json());
+    cargarHistorial(data);
+}
+
+function cargarHistorial(historial){
+    const tabla = document.getElementById("cuerpo-historial");
     tabla.innerHTML = "";
-    historial.forEach((prestamo, i) => {
+    historial.forEach((prestamo) => {
         let linea = "";
-        prestamo.forEach((elem) => {
-            linea += "<td>" + String(elem) + "</td>";
-        });
+        for (let elem in prestamo) {
+            linea += "<td>" + String(prestamo[elem]) + "</td>";
+        };
         tabla.innerHTML += "<tr>" + linea + "</tr>";
-    })
+    });
+}
+
+function funcionAsync(time){
+    setTimeout(()=>console.log("hola"), time);
+    return 0;
 }
