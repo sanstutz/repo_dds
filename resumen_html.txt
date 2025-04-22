@@ -10,7 +10,7 @@ Dentro de <head>:
 Dentro de <body>
 <h1>[contenido]</h1> : hace un titulo con [contenido] en negrita. Va de h1 a h6, donde h1 es el mas grande
 <p></p> : parrafo
-<a href="url">[texto]</a> : crea un link en texto a la url
+<a href="url">[texto]</a> : crea un link que redirecciona a la url al clickear texto
 <hr> : linea horizontal
 <br> : salto de linea
 <table></table> : crea una tabla
