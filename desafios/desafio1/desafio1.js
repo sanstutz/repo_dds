@@ -33,7 +33,7 @@ for(let i = 0; i < 1000000; i++){
         signo_anterior = 0;
     }
 
-    let resto = ((n % 7) + 7) % 7;
+    let resto = n % 7;
     if (resto === 0 || resto === 3 || resto === 5 || resto === 6){
         cant_resto++;
     }

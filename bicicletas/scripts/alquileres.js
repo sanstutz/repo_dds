@@ -4,18 +4,17 @@
 })();
 
 async function buscarAlquileres(){
-    // method: "GET", headers: {"Content-Type": "application/json"}
     // await == espera a que resuelva la promesa y asigna el valor devuelto
 
-    // const data = fetch("https://api-bici-alquileres.vercel.app/api/alquileres").then(res => res.json()).then(d => {cargarHistorial(d)});
+    // fetch("https://api-bici-alquileres.vercel.app/api/alquileres").then(res => res.json()).then(d => {cargarHistorial(d)});
 
-    // const json = fetch("https://api-bici-alquileres.vercel.app/api/alquileres").then(res => res.json())
-    // const data = await json;
+    // const promesa = fetch("https://api-bici-alquileres.vercel.app/api/alquileres").then(res => res.json());
+    // const data = await promesa; // al resolver la promesa, va a recibir otra promesa (json), y va a seguir esperando hasta resolverla
 
-    /*const res = await fetch("https://api-bici-alquileres.vercel.app/api/alquileres");
-    const data = await res.json();*/
+    // const respuesta = await fetch("https://api-bici-alquileres.vercel.app/api/alquileres");
+    // const data = await respuesta.json();
 
-    //const data = await fetch("https://api-bici-alquileres.vercel.app/api/alquileres").then(res => res.json());
+    const data = await fetch("https://api-bici-alquileres.vercel.app/api/alquileres").then(res => res.json());
     cargarHistorial(data);
 }
 
