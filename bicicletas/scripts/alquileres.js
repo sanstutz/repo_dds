@@ -15,7 +15,7 @@ async function buscarAlquileres(){
     /*const res = await fetch("https://api-bici-alquileres.vercel.app/api/alquileres");
     const data = await res.json();*/
 
-    //const data = await fetch("https://api-bici-alquileres.vercel.app/api/alquileres").then(res => res.json());
+    const data = await fetch("https://api-bici-alquileres.vercel.app/api/alquileres").then(res => res.json());
     cargarHistorial(data);
 }
 
