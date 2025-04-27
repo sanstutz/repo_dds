@@ -27,8 +27,10 @@ server.get("/api/barrios", async (req, res) => {
 });
 
 server.get("/api/estaciones", async (req, res) => {
+    const sortBy = req.query.sortby === "id" ? "idEstacion" : "nombre"; // por defecto ordeno por nombre
     const estaciones = await Estacion.findAll({
-        order: [["nombre", "ASC"]]
+        order: [[sortBy, "ASC"]],
+        include: Barrio
     });
     if (estaciones.length === 0)
         return res.status(404).json({error: "No se encontraron estaciones"});
@@ -36,7 +38,7 @@ server.get("/api/estaciones", async (req, res) => {
         idEstacion: estacion.idEstacion,
         nombre: estacion.nombre,
         direccion: estacion.direccion,
-        barrio: estacion.idBarrio,
+        barrio: estacion.Barrio,
         activa: estacion.activa == true
     }));
     res.status(200).json(estacionesLimpio);

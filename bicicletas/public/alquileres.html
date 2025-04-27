@@ -98,7 +98,7 @@
     <main class="container my-4">
         <h1>Historial de alquileres</h1>
         <hr>
-        <form class="row">
+        <form class="row" id="form-filtro">
             <div class="d-flex flex-column col-6">
                 <label class="form-label" for="select-estacion">Estación de retiro o devolución:</label>
                 <select class="form-select" id="select-estacion" name="estacion">
@@ -118,7 +118,7 @@
                 <label class="form-label" for="input-fecha">Fecha:</label>
                 <input type="date" class="form-control mb-auto" id="input-fecha" name="fecha">
                 <div class="mt-3">
-                    <button type="submit" id="boton-filtrar" class="btn btn-primary">Filtrar</button>
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
                 </div>
             </div>
         </form>

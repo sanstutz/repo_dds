@@ -1,34 +1,14 @@
+import { getAlquileres, getEstaciones } from "./conexiones.js";
+
 (function (){
     document.addEventListener("DOMContentLoaded", async () => {
         cargarEstaciones();
         cargarHistorial(await getAlquileres());
-        document.getElementById("boton-filtrar").addEventListener("click", filtrar);
+        document.getElementById("form-filtro").addEventListener("submit", filtrar);
     });
 })();
 
-async function getAlquileres(){
-    // await == espera a que resuelva la promesa y asigna el valor devuelto
-    const respuesta = await fetch("https://api-bici-alquileres.vercel.app/api/alquileres", {
-        method: "GET",
-        headers: {"Content-Type": "application/json"}
-    });
 
-    if(!respuesta.ok){
-        throw Error("Error al buscar alquileres");
-    }
-    const alq = await respuesta.json();
-    return alq;
-}
-
-async function getEstaciones() {
-    const respuesta = await fetch("http://localhost:3000/api/estaciones");
-
-    if(!respuesta.ok){
-        throw Error("Error al buscar estaciones");
-    }
-    const est = await respuesta.json();
-    return est;
-}
 
 function cargarHistorial(alquileres){
     const tabla = document.getElementById("cuerpo-historial");
