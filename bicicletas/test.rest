@@ -1,0 +1,7 @@
+### Obtener la respuesta de la API en la ruta /barrios
+GET http://localhost:3000/api/barrios
+Accept: application/json
+
+### Obtener estaciones
+GET http://localhost:3000/api/estaciones
+Accept: application/json
