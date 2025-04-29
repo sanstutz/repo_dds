@@ -13,7 +13,7 @@ export async function getAlquileres(){
 }
 
 export async function getEstaciones(sortBy = "nombre") {
-    const respuesta = await fetch(`http://localhost:3000/api/estaciones?sortby=${sortBy}`);
+    const respuesta = await fetch("http://localhost:3000/api/estaciones?sortby=" + sortBy);
 
     if(!respuesta.ok){
         throw Error("Error al buscar estaciones");
