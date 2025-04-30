@@ -1,9 +1,8 @@
-import { getEstaciones } from "./conexiones.js";
-
 (function (){
     document.addEventListener("DOMContentLoaded", async () => {
-        cargarEstaciones(await getEstaciones());
+        console.log("hola1");
         document.getElementById("form-busqueda").addEventListener("submit", filtrar);
+        cargarEstaciones(await getEstaciones());
     });
 })();
 
@@ -24,4 +23,5 @@ function cargarEstaciones(estaciones){
 function filtrar(event){
     event.preventDefault();
     const estaciones = getEstaciones();
+    console.log("hola")
 }
