@@ -1,6 +1,7 @@
+import {getEstaciones} from "./app.js"
+
 (function (){
     document.addEventListener("DOMContentLoaded", async () => {
-        console.log("hola1");
         document.getElementById("form-busqueda").addEventListener("submit", filtrar);
         cargarEstaciones(await getEstaciones());
     });

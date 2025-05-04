@@ -1,4 +1,4 @@
-import { getAlquileres, getEstaciones } from "./conexiones.js";
+import { getAlquileres, getEstaciones } from "./app.js";
 
 (function (){
     document.addEventListener("DOMContentLoaded", async () => {
