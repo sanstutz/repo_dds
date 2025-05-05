@@ -1,0 +1,22 @@
+margenes: mt-*;mb-*;my-*;ml-*;mr-*;mx-*
+padding: con p?
+espacios?: g-*
+
+tamaño?: sm;md;algo de large y xlarge
+
+label: form-label
+text input: form-control
+check: form-check-input; form-check form-switch (en el div padre)
+select: form-select
+boton: btn [btn-primary || btn-secondary]
+tabla: table table-bordered
+thead: table-primary
+
+cosas de texto:
+text-[color]
+text-[alineacion]
+
+grid:
+(creo que el padre de todos debe tener container)
+padre: row
+hijos: col-[tamaño]-* -> sum(*) <= 12
