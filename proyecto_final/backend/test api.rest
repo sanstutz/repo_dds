@@ -1,0 +1,35 @@
+### Categorias
+GET http://localhost:3000/api/categorias
+Accept: "application/json"
+
+### Categoria
+GET http://localhost:3000/api/categorias/1
+Accept: "application/json"
+
+### Categoria
+GET http://localhost:3000/api/categorias/2
+Accept: "application/json"
+
+### Categoria inexistente
+GET http://localhost:3000/api/categorias/0
+Accept: "application/json"
+
+### Categoria invalida
+GET http://localhost:3000/api/categorias/hola
+Accept: "application/json"
+
+### Articulos
+GET http://localhost:3000/api/articulos
+Accept: "application/json"
+
+### Articulos
+GET http://localhost:3000/api/articulos?nombre=aire
+Accept: "application/json"
+
+### Articulos
+GET http://localhost:3000/api/articulos?activo=false
+Accept: "application/json"
+
+### Articulos
+GET http://localhost:3000/api/articulos?nombre=aire&pagina=2
+Accept: "application/json"
