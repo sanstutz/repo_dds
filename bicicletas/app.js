@@ -3,15 +3,17 @@ import sequelize from "./db.js";
 import Barrio from "./models/barrio.js";
 import Estacion from "./models/estacion.js";
 
-const server = express();
+const app = express();
 const PORT = 3000;
 
-server.get("/", (req, res) => {
+app.use(express.json())
+
+app.get("/", (req, res) => {
     res.redirect("/index.html");
     console.log("Nueva conexion");
 });
 
-server.get("/api/barrios", async (req, res) => {
+app.get("/api/barrios", async (req, res) => {
     const barrios = await Barrio.findAll({
         order: [["nombre", "ASC"]]
     })
@@ -26,7 +28,7 @@ server.get("/api/barrios", async (req, res) => {
     res.status(200).json(barriosLimpio);
 });
 
-server.get("/api/estaciones", async (req, res) => {
+app.get("/api/estaciones", async (req, res) => {
     const sortBy = req.query.sortby === "id" ? "idEstacion" : "nombre"; // por defecto ordeno por nombre
     const estaciones = await Estacion.findAll({
         order: [[sortBy, "ASC"]],
@@ -44,16 +46,16 @@ server.get("/api/estaciones", async (req, res) => {
     res.status(200).json(estacionesLimpio);
 })
 
-server.get("/echo", (req, res) => {
+app.get("/echo", (req, res) => {
     let msg = req.query.msg || "No hay mensaje";
     if (msg !== "No hay mensaje")
         msg += ` ${msg}`;
     res.status(200).send(msg);
 });
 
-server.use(express.static("./public")); // todo lo que esta en la carpeta public es accesible por el cliente y no hace falta poner un get individual para cada cosa
+app.use(express.static("./public")); // todo lo que esta en la carpeta public es accesible por el cliente y no hace falta poner un get individual para cada cosa
 
-server.use((req, res) => {
+app.use((req, res) => {
     res.status(404).json({error: "Recurso no encontrado"});
 });
 
@@ -68,5 +70,5 @@ server.use((req, res) => {
             process.exit(1); // Salir del proceso si no se puede conectar
         });
 
-    server.listen(PORT, () => {console.log(`Escuchando en el puerto ${PORT}...`)});
+    app.listen(PORT, () => {console.log(`Escuchando en el puerto ${PORT}...`)});
 }());
