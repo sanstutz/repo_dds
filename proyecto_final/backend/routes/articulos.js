@@ -1,6 +1,6 @@
 import express from "express";
 import Articulo from "../models/articulosModel.js";
-import { Op, ValidationError } from "sequelize";
+import { Op, QueryTypes, ValidationError } from "sequelize";
 
 const router = express.Router();
 
@@ -84,7 +84,7 @@ router.put("/:id", async (req, res) => {
             stock: req.body.stock,
             fechaAlta: req.body.fechaAlta,
             activo: req.body.activo,
-        }, { where: { id: req.params.id }});
+        }, { where: { id: req.params.id } });
 
         if (data[0] === 1) { // modifico 1 fila
             res.sendStatus(204); // deberia mandarle un mensajito de que esta bien para mantener consistencia?
@@ -116,27 +116,27 @@ router.delete("/:id", async (req, res) => {
                 res.sendStatus(404);
         }
         else {
-            // segun el paso a paso hay que invertirlo, no desactivarlo siempre, pero si viene delete yo supongo que siempre quieren borrarlo
-            const data = await Articulo.update({
-                activo: false
-            }, { where: { id: req.params.id } });
-            if (data[0] == 1)
-                res.sendStatus(200);
-            else
-                res.sendStatus(404);
+            let data = await Articulo.sequelize.query(
+                "UPDATE Articulo SET Activo = case when Activo = 1 then 0 else 1 end WHERE IdArticulo = :IdArticulo",
+                {
+                    replacements: { IdArticulo: +req.params.id },
+                    type: QueryTypes.UPDATE
+                }
+            );
+            res.sendStatus(200);
         }
     }
     catch (error) {
-        if (err instanceof ValidationError) {
+        if (error instanceof ValidationError) {
             // si son errores de validación, los devolvemos
-            const messages = err.errors.map((x) => x.message);
+            const messages = error.errors.map((x) => x.message);
             res.status(400).json(messages);
-          } else {
+        } else {
             // si son errores desconocidos, los dejamos que los controle el middleware de errores
-            throw err;
-          }
-        }    
+            throw error;
+        }
     }
+}
 );
 
 export default router;

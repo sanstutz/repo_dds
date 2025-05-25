@@ -55,7 +55,7 @@ Content-Type: application/json
 }
 
 ### Borrar articulo
-DELETE http://localhost:3000/api/articulos/202
+DELETE http://localhost:3000/api/articulos/1
 Accept: application/json
 
 ### Borrar fisicamente articulo
