@@ -1,6 +1,6 @@
 import express from "express";
 import Articulo from "../models/articulosModel.js";
-import { Op, where } from "sequelize";
+import { Op, ValidationError } from "sequelize";
 
 const router = express.Router();
 
@@ -51,7 +51,7 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
     try {
-        let item = await articulos.create({
+        const item = await Articulo.create({
             nombre: req.body.nombre,
             precio: req.body.precio,
             codigoDeBarra: req.body.codigoDeBarra,
@@ -60,7 +60,7 @@ router.post("/", async (req, res) => {
             fechaAlta: req.body.fechaAlta,
             activo: req.body.activo,
         });
-        res.status(200).json(item.dataValues); // devuelve el registro agregado
+        res.status(201).json(item.dataValues); // devuelve el registro agregado
     } catch (error) {
         if (error instanceof ValidationError) {
             // si son errores de validación, los devolvemos
@@ -76,7 +76,6 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
     try {
-        const id = req.body.id;
         const data = await Articulo.update({
             nombre: req.body.nombre,
             precio: req.body.precio,
@@ -85,7 +84,7 @@ router.put("/:id", async (req, res) => {
             stock: req.body.stock,
             fechaAlta: req.body.fechaAlta,
             activo: req.body.activo,
-        }, { where: { id: id } });
+        }, { where: { id: req.params.id }});
 
         if (data[0] === 1) { // modifico 1 fila
             res.sendStatus(204); // deberia mandarle un mensajito de que esta bien para mantener consistencia?
@@ -108,7 +107,7 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
     try {
-        let bajaFisica = false;
+        let bajaFisica = req.query.fisica === "true";
         if (bajaFisica) {
             const filasBorradas = await Articulo.destroy({ where: { id: req.params.id } });
             if (filasBorradas == 1)
@@ -117,7 +116,7 @@ router.delete("/:id", async (req, res) => {
                 res.sendStatus(404);
         }
         else {
-            // segun el paso a paso hay que invertirlo, no desactivarlo siempre, capaz esto es importante mas adelante
+            // segun el paso a paso hay que invertirlo, no desactivarlo siempre, pero si viene delete yo supongo que siempre quieren borrarlo
             const data = await Articulo.update({
                 activo: false
             }, { where: { id: req.params.id } });

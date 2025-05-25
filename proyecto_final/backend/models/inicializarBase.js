@@ -11,8 +11,9 @@ const __dirname = dirname(__filename);
 
 async function inicializarBase() {
     try {
-        const archivo = path.join(__dirname, '.././data/pymes.db');
+        const archivo = path.join(__dirname, '.././.data/pymes.db');
         if (fs.existsSync(archivo)) {
+            return;
         }
 
         await sequelize.sync({ force: true });
