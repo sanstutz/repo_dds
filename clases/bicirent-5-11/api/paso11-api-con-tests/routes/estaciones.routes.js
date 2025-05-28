@@ -52,4 +52,18 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.post("/", async (req, res) => {
+  try {
+    const estacion = req.body;
+    EstacionesService.crear({
+      nombre: estacion.nombre,
+      direccion: estacion.direccion
+    });
+  }
+  catch (error) {
+    console.error("Error creando estación:", error);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+});
+
 export default router;

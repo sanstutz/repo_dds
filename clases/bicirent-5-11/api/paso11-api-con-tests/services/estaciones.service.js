@@ -12,6 +12,10 @@ class EstacionesService {
   static async obtenerPorIdConBarrio(estacionId) {
     return await EstacionRepository.obtenerPorIdConBarrio(estacionId);
   }
+
+  static async crear(estacion) {
+    return await EstacionRepository.crear(estacion);
+  }
 }
 
 export default EstacionesService;
