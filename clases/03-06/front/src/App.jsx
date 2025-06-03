@@ -5,6 +5,7 @@ import PiePagina from './components/PiePagina.jsx';
 import Inicio from './pages/Inicio.jsx';
 import { Estaciones } from './pages/Estaciones.jsx';
 import NuevaEstacion from './pages/NuevaEstacion.jsx';
+import { Tarifas } from './pages/Tarifas.jsx';
 
 
 
@@ -18,6 +19,7 @@ function App() {
             <Route index element={<Estaciones />} />
             <Route path="nueva-estacion" element={<NuevaEstacion/>} />
           </Route>
+          <Route path="/tarifas" element={<Tarifas/>} />
         </Routes>
         <PiePagina />
     </BrowserRouter>
