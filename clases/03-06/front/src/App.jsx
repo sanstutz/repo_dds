@@ -8,7 +8,6 @@ import NuevaEstacion from './pages/NuevaEstacion.jsx';
 import { Tarifas } from './pages/Tarifas.jsx';
 
 
-
 function App() {
   return (
     <BrowserRouter>

@@ -2,6 +2,7 @@
 
 import RepositorioBase from "./repositorioBase.js";
 import Tarifa from "../models/tarifa.js";
+import { Op } from "sequelize";
 
 class TarifaRepository extends RepositorioBase {
   constructor() {
@@ -10,8 +11,12 @@ class TarifaRepository extends RepositorioBase {
 
   // Método para buscar tarifas con filtros como descripción y tipo
   // Buscar tarifas definidas por día de la semana ('S')
-  async buscarPorSemana({ diaSemana, tipoTarifa = -1 } = {}) {
+  async buscarPorSemana({ descripcion, diaSemana, tipoTarifa = -1 } = {}) {
     const where = { definicion: "S", diaSemana };
+        
+    if (descripcion) {
+      where.descripcion = { [Op.like]: `%${descripcion}%` };
+    }
 
     if (!Number.isNaN(tipoTarifa) && tipoTarifa !== -1) {
       where.tipoTarifa = tipoTarifa;
@@ -21,8 +26,12 @@ class TarifaRepository extends RepositorioBase {
   }
 
   // Buscar tarifas definidas por fecha específica ('C')
-  async buscarPorFecha({ dia, mes, anio, tipoTarifa = -1 } = {}) {
+  async buscarPorFecha({ descripcion, dia, mes, anio, tipoTarifa = -1 } = {}) {
     const where = { definicion: "C", diaMes: dia, mes, anio };
+    
+    if (descripcion) {
+      where.descripcion = { [Op.like]: `%${descripcion}%` };
+    }
 
     if (!Number.isNaN(tipoTarifa) && tipoTarifa !== -1) {
       where.tipoTarifa = tipoTarifa;

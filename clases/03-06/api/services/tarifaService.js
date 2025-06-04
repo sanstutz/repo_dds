@@ -13,19 +13,19 @@ class TarifaService {
     return tarifa;
   }
 
-  static async buscarPorSemana(diaSemana, tipoTarifa) {
+  static async buscarPorSemana(descripcion="", diaSemana, tipoTarifa) {
     if (diaSemana < 1 || diaSemana > 7) throw new HttpError(400, "Día de la semana inválido");
-    return tarifaRepository.buscarPorSemana({ diaSemana, tipoTarifa });
+    return tarifaRepository.buscarPorSemana({descripcion, diaSemana, tipoTarifa });
   }
 
-  static async buscarPorFecha(dia, mes, anio, tipoTarifa) {
+  static async buscarPorFecha(descripcion="", dia, mes, anio, tipoTarifa) {
     if (
       dia < 1 || dia > 31
       || mes < 1 || mes > 12
       || anio < 2000 // o la regla que quieras
     ) throw new HttpError(400, "Fecha inválida");
 
-    return tarifaRepository.buscarPorFecha({ dia, mes, anio, tipoTarifa });
+    return tarifaRepository.buscarPorFecha({descripcion, dia, mes, anio, tipoTarifa });
   }
 
   static async crear(tarifa) {

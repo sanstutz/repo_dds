@@ -4,11 +4,10 @@ import { estacionesService } from "../services/estaciones.service.js";
 import { barriosService } from "../services/barrios.service.js";
 
 function NuevaEstacion() {
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    const { register, handleSubmit, formState: { errors } } = useForm();    
     const [barrios, setBarrios] = useState([]);
 
     function onSubmit(data) {
-        console.log(data);
         estacionesService.crearEstacion(data);
     }
 

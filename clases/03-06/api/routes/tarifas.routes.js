@@ -24,11 +24,12 @@ router.get("/", async (req, res) => {
 router.get("/fecha", async (req, res) => {
   console.log("fecha");
   try {
+    const desc = req.query.descripcion || "";
     const dia = parseInt(req.query.dia, 10);
     const mes = parseInt(req.query.mes, 10);
     const anio = parseInt(req.query.anio, 10);
     const tipoTarifa = parseInt(req.query.tipoTarifa || "-1", 10);
-    const tarifas = await TarifaService.buscarPorFecha(dia, mes, anio, tipoTarifa);
+    const tarifas = await TarifaService.buscarPorFecha(desc, dia, mes, anio, tipoTarifa);
     return res.status(200).json(tarifas);
   }
   catch (error) {
@@ -60,9 +61,10 @@ router.get("/:id", async (req, res) => {
 router.get("/semana/:diaSemana", async (req, res) => {
   console.log("semana");
   try {
+    const desc = req.query.descripcion || "";
     const diaSemana = parseInt(req.params.diaSemana, 10);
     const tipoTarifa = parseInt(req.query.tipoTarifa || "-1", 10);
-    const tarifas = await TarifaService.buscarPorSemana(diaSemana, tipoTarifa);
+    const tarifas = await TarifaService.buscarPorSemana(desc, diaSemana, tipoTarifa);
     return res.status(200).json(tarifas);
   }
   catch (error) {
