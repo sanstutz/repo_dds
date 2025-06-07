@@ -21,7 +21,7 @@ const PORT = 3000; // Definido directamente, sin usar process.env
 //  solo para nuestro frontend
 app.use(cors({
   origin: "http://localhost:5173",
-  methods: ["GET", "POST"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
 
