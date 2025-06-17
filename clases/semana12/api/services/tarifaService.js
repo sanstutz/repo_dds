@@ -13,23 +13,24 @@ class TarifaService {
     return tarifa;
   }
 
-  static async buscarPorSemana(descripcion="", diaSemana, tipoTarifa) {
+  static async buscarPorSemana(diaSemana, tipoTarifa, descripcion="") {
     if (diaSemana < 1 || diaSemana > 7) throw new HttpError(400, "Día de la semana inválido");
-    return tarifaRepository.buscarPorSemana({descripcion, diaSemana, tipoTarifa });
+    return tarifaRepository.buscarPorSemana(diaSemana, tipoTarifa, descripcion);
   }
 
-  static async buscarPorFecha(descripcion="", dia, mes, anio, tipoTarifa) {
+  static async buscarPorFecha(dia, mes, anio, tipoTarifa, descripcion="") {
+    console.log(dia, mes, anio)
     if (
       dia < 1 || dia > 31
       || mes < 1 || mes > 12
-      || anio < 2000 // o la regla que quieras
+      || anio < 2000
     ) throw new HttpError(400, "Fecha inválida");
 
-    return tarifaRepository.buscarPorFecha({descripcion, dia, mes, anio, tipoTarifa });
+    return tarifaRepository.buscarPorFecha(dia, mes, anio, tipoTarifa, descripcion);
   }
 
   static async crear(tarifa) {
-    if (!tarifa.descripcion || typeof (tarifa.descripcion) !== String) throw new HttpError(400, "Descripción es requerida");
+    if (!tarifa.descripcion || typeof (tarifa.descripcion) !== "string") throw new HttpError(400, "Descripción es requerida");
     if (tarifa.descripcion.length > 100) throw new HttpError(400, "Descripción no puede exceder 100 caracteres");
 
     if (![1, 2].includes(tarifa.tipoTarifa)) throw new HttpError(400, "Tipo de tarifa inválido");
@@ -48,10 +49,10 @@ class TarifaService {
       if (tarifa.diaSemana) throw new HttpError(400, "No se permite día de la semana para tarifas mensuales");
     }
 
-    if (!tarifa.montoFijoAlquiler || tarifa.montoFijoAlquiler < 0) throw new HttpError(400, "Monto fijo de alquiler inválido");
-    if (!tarifa.montoMinutoFraccion || tarifa.montoMinutoFraccion < 0) throw new HttpError(400, "Monto por minuto o fracción inválido");
-    if (!tarifa.montoKm || tarifa.montoKm < 0) throw new HttpError(400, "Monto por kilómetro inválido");
-    if (!tarifa.montoHora || tarifa.montoHora < 0) throw new HttpError(400, "Monto por hora inválido");
+    if (tarifa.montoFijoAlquiler == null || tarifa.montoFijoAlquiler < 0) throw new HttpError(400, "Monto fijo de alquiler inválido");
+    if (tarifa.montoMinutoFraccion == null || tarifa.montoMinutoFraccion < 0) throw new HttpError(400, "Monto por minuto o fracción inválido");
+    if (tarifa.montoKm == null || tarifa.montoKm < 0) throw new HttpError(400, "Monto por kilómetro inválido");
+    if (tarifa.montoHora == null || tarifa.montoHora < 0) throw new HttpError(400, "Monto por hora inválido");
 
     // validar que no haya otra
     if (definicion === "S"){
@@ -66,7 +67,6 @@ class TarifaService {
         throw new HttpError(409, "Ya existe una tarifa del mismo tipo para ese día");
       }
     }
-
     return await tarifaRepository.crear(tarifa);
   }
 
@@ -75,10 +75,11 @@ class TarifaService {
     if (!tarifaExistente) throw new HttpError(404, "Tarifa no encontrada");
 
     // Validar campos como en crear
-    if (!tarifa.descripcion || typeof (tarifa.descripcion) !== String) throw new HttpError(400, "Descripción es requerida");
+    if (!tarifa.descripcion || typeof (tarifa.descripcion) !== "string") throw new HttpError(400, "Descripción es requerida");
     if (tarifa.descripcion.length > 100) throw new HttpError(400, "Descripción no puede exceder 100 caracteres");
 
-    if (![1, 2].includes(tarifa.tipoTarifa)) throw new HttpError(400, "Tipo de tarifa inválido");
+    // no se puede actualizar el dia sin revisar unicidad
+    /*if (![1, 2].includes(tarifa.tipoTarifa)) throw new HttpError(400, "Tipo de tarifa inválido");
 
     if (!["S", "C"].includes(tarifa.definicion.toUpperCase())) throw new HttpError(400, "Definición inválida");
     const definicion = tarifa.definicion.toUpperCase();
@@ -92,12 +93,12 @@ class TarifaService {
       if (!tarifa.mes || tarifa.mes < 1 || tarifa.mes > 12) throw new HttpError(400, "Mes inválido");
       if (!tarifa.anio) throw new HttpError(400, "Año inválido");
       if (tarifa.diaSemana) throw new HttpError(400, "No se permite día de la semana para tarifas mensuales");
-    }
+    }*/
 
-    if (!tarifa.montoFijoAlquiler || tarifa.montoFijoAlquiler < 0) throw new HttpError(400, "Monto fijo de alquiler inválido");
-    if (!tarifa.montoMinutoFraccion || tarifa.montoMinutoFraccion < 0) throw new HttpError(400, "Monto por minuto o fracción inválido");
-    if (!tarifa.montoKm || tarifa.montoKm < 0) throw new HttpError(400, "Monto por kilómetro inválido");
-    if (!tarifa.montoHora || tarifa.montoHora < 0) throw new HttpError(400, "Monto por hora inválido");
+    if (tarifa.montoFijoAlquiler == null || tarifa.montoFijoAlquiler < 0) throw new HttpError(400, "Monto fijo de alquiler inválido");
+    if (tarifa.montoMinutoFraccion == null || tarifa.montoMinutoFraccion < 0) throw new HttpError(400, "Monto por minuto o fracción inválido");
+    if (tarifa.montoKm == null || tarifa.montoKm < 0) throw new HttpError(400, "Monto por kilómetro inválido");
+    if (tarifa.montoHora == null || tarifa.montoHora < 0) throw new HttpError(400, "Monto por hora inválido");
 
     return tarifaRepository.actualizar(id, tarifa);
   }

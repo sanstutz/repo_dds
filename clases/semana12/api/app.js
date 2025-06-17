@@ -10,15 +10,8 @@ import tarifasRouter from "./routes/tarifas.routes.js";
 import clientesRouter from "./routes/clientes.routes.js";
 
 const app = express();
-const PORT = 3000; // Definido directamente, sin usar process.env
+const PORT = 3000;
 
-// #region Middlewares
-// Agregamos el middleware cors para configurar los permisos de acceso desde el frontend
-// Esta línea configura cors para permitir cualquier tipo de tráfico desde cualquier origen
-// app.use(cors);
-
-// sin embargo, no es ideal abrir completamente la aplicación por lo que deberíamos configurar
-//  solo para nuestro frontend
 app.use(cors({
   origin: "http://localhost:5173",
   methods: ["GET", "POST", "PUT", "DELETE"],
@@ -26,13 +19,11 @@ app.use(cors({
 }));
 
 // Middlewares de parseo de Body
-app
-  .use(express.json()) // Para parsear JSON en el body
-  .use(express.urlencoded({ extended: true })); // Para parsear bodies urlencoded (formularios HTML)
+app.use(express.json()); // Para parsear JSON en el body
+app.use(express.urlencoded({ extended: true })); // Para parsear bodies urlencoded (formularios HTML)
 
-// 🚀 Nuestro middleware logger
+// Nuestro middleware logger
 app.use(logger);
-// #endregion
 
 // Ruta principal de servidor
 app.get("/", (req, res) => {
@@ -47,7 +38,7 @@ app.get("/", (req, res) => {
       </head>
       <body>
         <div class="container">
-          <h1>🚀 Servidor Express Activo</h1>
+          <h1>Servidor Express Activo</h1>
           <p>API corriendo en <strong>http://localhost:3000</strong></p>
         </div>
       </body>
@@ -81,6 +72,6 @@ app.use((req, res) => {
   }
 
   app.listen(PORT, () => {
-    console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
   });
 }());

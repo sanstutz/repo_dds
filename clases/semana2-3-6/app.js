@@ -1,5 +1,6 @@
 import express from "express";
 import sequelize from "./db.js";
+import { Op } from "sequelize";
 import Barrio from "./models/barrio.js";
 import Estacion from "./models/estacion.js";
 
@@ -29,11 +30,33 @@ app.get("/api/barrios", async (req, res) => {
 });
 
 app.get("/api/estaciones", async (req, res) => {
-    const sortBy = req.query.sortby === "id" ? "idEstacion" : "nombre"; // por defecto ordeno por nombre
+    const { texto = "", barrio = "", inactivas = "", limite = 10 } = req.query;
+    const where = {};
+
+    if (texto !== ""){
+        where[Op.or] = {
+            nombre: {[Op.like]: `%${texto}%`},
+            direccion: {[Op.like]: `%${texto}%`}
+        }
+    }
+
+    const barrioParam = Number(barrio);
+    if (barrioParam !== NaN && barrioParam !== 0){
+        where.idBarrio = barrio
+    }
+
+    const inactivasParam = inactivas === "true";
+    if (!inactivasParam){
+        where.activa = true
+    }
+
     const estaciones = await Estacion.findAll({
-        order: [[sortBy, "ASC"]],
+        order: [["nombre", "ASC"]],
+        where: where,
+        limit: limite,
         include: Barrio
     });
+
     if (estaciones.length === 0)
         return res.status(404).json({error: "No se encontraron estaciones"});
     const estacionesLimpio = estaciones.map((estacion) => ({

@@ -11,7 +11,7 @@ class TarifaRepository extends RepositorioBase {
 
   // Método para buscar tarifas con filtros como descripción y tipo
   // Buscar tarifas definidas por día de la semana ('S')
-  async buscarPorSemana({ descripcion, diaSemana, tipoTarifa = -1 } = {}) {
+  async buscarPorSemana(diaSemana, tipoTarifa = -1, descripcion="") {
     const where = { definicion: "S", diaSemana };
         
     if (descripcion) {
@@ -26,7 +26,7 @@ class TarifaRepository extends RepositorioBase {
   }
 
   // Buscar tarifas definidas por fecha específica ('C')
-  async buscarPorFecha({ descripcion, dia, mes, anio, tipoTarifa = -1 } = {}) {
+  async buscarPorFecha(dia, mes, anio, tipoTarifa = -1, descripcion="") {
     const where = { definicion: "C", diaMes: dia, mes, anio };
     
     if (descripcion) {

@@ -7,7 +7,7 @@ const customLogger = (sql) => {
     const clean = sql.replace("Executing (default): ", "");
     // Formatear solo si no contiene parámetros o bindings
     if (!clean.includes("$") && !clean.includes("?")) {
-      console.log(`\n📝 SQL ejecutado:\n${format(clean)}`);
+      console.log(`\nSQL ejecutado:\n${format(clean)}`);
     }
     else {
       console.log(`\n🔍 SQL:\n${clean}`); // Mostrar sin formatear si es más complejo
