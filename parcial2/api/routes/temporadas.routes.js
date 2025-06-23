@@ -29,6 +29,26 @@ router.get("/", async (req, res) => {
     }
 });
 
+router.get("/ultimas", async (req, res) => {
+    try {
+        const temporadas = await temporadasService.buscarUltimas();
+        const respuesta = temporadas.map(temporada => ({
+            id: temporada.id,
+            numero: temporada.numero,
+            episodios: temporada.episodios,
+            estreno: temporada.estreno,
+            genero: temporada.genero,
+            creador: temporada.creador,
+            serie: temporada.serie
+        }));
+        res.status(200).json(respuesta);
+    }
+    catch (error) {
+        console.log("Error al buscar temporadas: " + error.toString());
+        res.status(500).send("Error interno del servidor");
+    }
+});
+
 router.post("/", async (req, res) => {
     try {
         const datos = {

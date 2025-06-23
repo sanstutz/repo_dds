@@ -14,6 +14,10 @@ Content-Type: application/json
 GET http://localhost:3000/api/temporadas?genero=comedia
 Content-Type: application/json
 
+### Mostrar las ultimas agregadas
+GET http://localhost:3000/api/temporadas/ultimas
+Content-Type: application/json
+
 ### Crear una temporada de Stranger Things
 POST http://localhost:3000/api/temporadas
 Content-Type: application/json

@@ -27,6 +27,19 @@ async function buscar(filtros) {
     return temporadas;
 }
 
+async function buscarUltimas() {
+    const limit = 50;
+    const temporadas = await Temporada.findAll({
+        include: {
+            model: Serie,
+            as: "serie"
+        },
+        limit: limit,
+        order: [["id", "DESC"]]
+    });
+    return temporadas;
+}
+
 async function crear(datos) {
     await validarSerie(datos); // si falla tira error y es atrapado por el catch del router
     validarEstreno(datos);
@@ -104,4 +117,4 @@ function validarDatos(datos) {
         throw new HttpError(400, "El creador no puede estar vacio");
 }
 
-export default { buscar, crear, editar, borrar };
+export default { buscar, buscarUltimas, crear, editar, borrar };
