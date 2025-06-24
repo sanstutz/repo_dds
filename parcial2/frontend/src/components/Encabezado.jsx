@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 function Encabezado() {
     return (
-        <header className="bg-light text-white py-3 mb-4">
+        <header className="bg-dark text-white py-3 mb-4">
             <div className="container">
                 <nav className="mt-3">
                     <ul className="nav nav-pills d-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>

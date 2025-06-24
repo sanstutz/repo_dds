@@ -38,14 +38,14 @@ function TemporadasFormulario({ temporada }) {
         let res = "";
         if (temporada) {
             res = await temporadasService.actualizar(temporada.id, data);
-            setError(res);
+            setError(res.msg);
         }
         else {
             res = await temporadasService.crear(data);
-            setError(res);
+            setError(res.msg);
         }
         
-        if (res === ""){
+        if (res.ok){
             const msg = temporada ? "modificada" : "creada";
             alert("Temporada " + msg + " con éxito.")
             navigate("/listado");

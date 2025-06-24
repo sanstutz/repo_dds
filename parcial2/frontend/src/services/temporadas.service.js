@@ -25,14 +25,14 @@ async function buscar(filtros) {
 async function actualizar(id, data) {
     try {
         await axios.put("/temporadas/" + id, data);
-        return "";
+        return {ok: true, msg: ""};
     }
     catch (error) {
         if (isAxiosError(error)){
             if (error.response){
-                return error.response.data;
+                return {ok: false, msg: error.response.data};
             }
-            return "Error desconocido al hacer la petición";
+            return {ok: false, msg: "Error desconocido al hacer la petición"};
         }
     }
 }
@@ -40,14 +40,14 @@ async function actualizar(id, data) {
 async function crear(data) {
     try {
         await axios.post("/temporadas", data);
-        return "";
+        return {ok: true, msg: ""};
     }
     catch (error) {
         if (isAxiosError(error)){
             if (error.response){
-                return error.response.data;
+                return {ok: false, msg: error.response.data};
             }
-            return "Error desconocido al hacer la petición";
+            return {ok: false, msg: "Error desconocido al hacer la petición"};
         }
     }
 }

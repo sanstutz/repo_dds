@@ -17,7 +17,7 @@ function App() {
         <Route path="/listado" element={<TemporadasListado seleccionarTemporada={setTemporada}/>}/>
         <Route path="/nueva" element={<TemporadasFormulario/>}/>
         <Route path="/editar" element={<TemporadasFormulario temporada={temporada}/>}/>
-        <Route path="*" element={<Navigate to={"/inicio"} />}/>
+        <Route path="*" element={<Navigate to={"/"} />}/>
       </Routes>
     </BrowserRouter>
   );
