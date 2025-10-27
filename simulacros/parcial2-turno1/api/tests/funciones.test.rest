@@ -1,0 +1,62 @@
+### funciones en cartelera
+GET http://localhost:3000/api/funciones
+Content-Type: application/json
+
+### funciones de Como Entrenar a Tu Dragon
+GET http://localhost:3000/api/funciones?nombre=Cómo%20Entrenar%20A%20Tu%20Dragón
+Content-Type: application/json
+
+### funciones en la sala 5
+GET http://localhost:3000/api/funciones?sala=Sala%205
+Content-Type: application/json
+
+### funciones hoy (20/06/2025)
+GET http://localhost:3000/api/funciones?fecha=2025-06-20
+Content-Type: application/json
+
+### crear funcion
+POST http://localhost:3000/api/funciones/nueva-funcion
+Content-Type: application/json
+
+
+{
+    "idCine": 1,
+    "pelicula": "Star Wars",
+    "fechaDesde": "2025-06-19",
+    "fechaHasta": "2025-06-25",
+    "sala": "Sala 1",
+    "horario": "18:00"
+}
+
+### editar funcion
+PUT http://localhost:3000/api/funciones/editar-funcion/12
+Content-Type: application/json
+
+
+{
+    "idCine": 1,
+    "pelicula": "Star Wars",
+    "fechaDesde": "2025-06-19",
+    "fechaHasta": "2025-06-25",
+    "sala": "Sala 2",
+    "horario": "18:00"
+}
+
+
+### editar funcion con valores duplicados
+PUT http://localhost:3000/api/funciones/editar-funcion/1
+Content-Type: application/json
+
+
+{
+    "pelicula": "Cómo entrenar a tu dragón",
+    "fechaDesde": "2025-06-19",
+    "fechaHasta": "2025-06-25",
+    "horario": "18:15",
+    "sala": "Sala 1",
+    "idCine": 6
+}
+
+### eliminar funcion
+DELETE http://localhost:3000/api/funciones/eliminar-funcion/12
+Content-Type: application/json
